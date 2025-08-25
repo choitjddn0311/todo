@@ -1,0 +1,194 @@
+@import url('https://fastly.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Galmuri9';
+}
+#wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header {
+    width: 600px;
+    height: 100px;
+    background: orangered;
+    padding: 0 20px;
+}
+header > a {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+main {
+    width: 600px;
+    background: #111;
+    height: 800px;
+    color: orangered;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 20px;
+    align-items: center;
+}
+.titleText {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+.todotlistButton {
+    width: 90%;
+    height: 60px;
+    background: orangered;
+    color: #111;
+    font-size: 20px;
+    border: none;
+    font-weight: bold;
+}
+.todotlistButton:hover {
+    cursor: pointer;
+    animation:color 1s infinite;
+}
+@keyframes color {
+    0%,20%,40%,60%,80%,100% {
+        background: orangered;
+    }
+    10%,30%,50%,70%,90% {
+        background: orange;
+    }
+}
+.modalContainer {
+    width: 600px;
+    height: 900px;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+}
+.modalContainer.show {
+    visibility: visible;
+    opacity: 1;
+}
+.modal {
+    width: 80%;
+    height: 250px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.modalLogo {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: start;
+    overflow: hidden;
+    position: relative;
+}
+.modalLogo > img {
+    height: 100%;
+    flex-shrink: 0;
+    animation: logoflow 5s linear infinite;
+}
+@keyframes logoflow {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+.modalTitle {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.inputTodoContainer {
+    width: 100%;
+    height: 150px;
+    /* background: red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: 10px;
+    position: relative;
+}
+.categoryContainer {
+    width: 90%;
+    height: 30px;
+    background: #aaa;
+    display: flex;
+    gap: 10px;
+}
+.categoryContainer > div {
+    width: 70px;
+    height: 100%;
+    text-align: center;
+    align-content: center;
+}
+.categoryContainer > div:hover {
+    cursor: pointer;
+}
+.c1 {
+    background: orangered;
+}
+.c2 {
+    background: orange;
+    /* filter: grayscale(0.7); */
+}
+.c3 {
+    background: royalblue;
+}
+.c4 {
+    background: green;
+}
+.dimmed {
+    filter: grayscale(0.7);
+}
+.inputTodoContainer > input[type=text]{
+    width: 90%;
+    height: 70px;
+    border: 1px solid #aaa;
+    outline: none;
+    padding-left: 10px;
+    font-size: 23px;
+}
+.submitTodoButton {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    background: #fff;
+    color: #aaa;
+    top: 55px;
+    right: 50px;
+    border: 2px solid #aaa;
+    visibility: hidden;
+}
+.modalCloseButton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    background: #fff;
+    color: #111;
+    border: 2px solid #111;
+    bottom: 250px;
+    font-size: 20px;
+    align-content: center;
+}
+.modalCloseButton:hover {
+    cursor: pointer;
+    background: #eee;
+}

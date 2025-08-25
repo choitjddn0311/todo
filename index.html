@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>순수 js todolist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="wrap">
+        <header>
+            <a href="index.html">
+                <img src="todolist_short.png" alt="">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            </a>
+        </header>
+        <main>
+            <div class="titleText">
+                <h1>오늘의 할 일</h1>
+                <h1>사용자: 최성우</h1>
+            </div>
+            <button class="todotlistButton">할일 작성하기</button>
+        </main>
+        <div class="modalContainer">
+            <button class="modalCloseButton"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal">
+                <div class="modalLogo">
+                    <img src="todolist_short.png" alt="">
+                    <img src="todolist_short.png" alt="">
+                    <img src="todolist_short.png" alt="">
+                    <img src="todolist_short.png" alt="">
+                    <img src="todolist_short.png" alt="">
+                    <img src="todolist_short.png" alt="">
+                    <img src="todolist_short.png" alt="">
+                    <img src="todolist_short.png" alt="">
+                    <img src="todolist_short.png" alt="">
+                    <img src="todolist_short.png" alt="">
+                </div>
+                <div class="modalTitle">
+                    <h2>카테고리 선택후 할 일을 작성해주세요.</h2>
+                    <p>please pick categories and then enter todo.</p>
+                </div>
+                <div class="inputTodoContainer">
+                    <div class="categoryContainer">
+                        <div class="c1">일</div>
+                        <div class="c2">취미</div>
+                        <div class="c3">집안일</div>
+                        <div class="c4">기타</div>
+                    </div>
+                    <input type="text" name="todo" class="todoInput">
+                    <button class="submitTodoButton"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
