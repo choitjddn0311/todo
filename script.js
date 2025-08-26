@@ -8,6 +8,8 @@ const todoSaveButton = document.querySelector('.todoSaveButton');
 let selectCategory = null;
 let categoryClass = '';
 let categoryText = '';
+const todostatus = document.querySelector('.todostatus');
+const pTag = document.querySelector('.pTag');
 
 const loadTodos = () => {
     const todos = JSON.parse(localStorage.getItem('todos')) || [];
@@ -17,7 +19,7 @@ const loadTodos = () => {
         todolistContainer.innerHTML += `
             <div class="todolist">
                 <input type="checkbox" name="todostatus" class="todostatus" ${todo.checked ? 'checked' : ''}>
-                <p>${todo.text}</p>
+                <p class="pTag">${todo.text}</p>
                 <div class="listCate">
                     <div class="${todo.categoryClass}">${todo.categoryText}</div>
                 </div>
@@ -25,7 +27,6 @@ const loadTodos = () => {
         `;
     });
 
-    // Add event listeners for checkboxes to update checked state in localStorage
     document.querySelectorAll('.todostatus').forEach((checkbox, index) => {
         checkbox.addEventListener('change', () => {
             const todos = JSON.parse(localStorage.getItem('todos')) || [];
@@ -35,7 +36,6 @@ const loadTodos = () => {
     });
 }
 
-// Call loadTodos on page load
 document.addEventListener('DOMContentLoaded', loadTodos);
 
 todotlistButton.addEventListener('click', () => {
@@ -98,18 +98,16 @@ todoSaveButton.addEventListener('click', () => {
     todos.push(newTodo);
     localStorage.setItem('todos', JSON.stringify(todos));
 
-    // Add todo to DOM
     todolistContainer.innerHTML += `
         <div class="todolist">
             <input type="checkbox" name="todostatus" class="todostatus">
-            <p>${inputText}</p>
+            <p class="pTag">${inputText}</p>
             <div class="listCate">
                 <div class="${categoryClass}">${categoryText}</div>
             </div>
         </div>
     `;
 
-    // Add event listener for the new checkbox
     const newCheckbox = todolistContainer.lastElementChild.querySelector('.todostatus');
     newCheckbox.addEventListener('change', () => {
         const todos = JSON.parse(localStorage.getItem('todos')) || [];
