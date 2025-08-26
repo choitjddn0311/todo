@@ -1,59 +1,121 @@
-const modal = () => {
-    const todotlistButton = document.querySelector('.todotlistButton');
-    const modalCloseButton = document.querySelector('.modalCloseButton');
-    const modalContainer = document.querySelector('.modalContainer');
-    const categories = document.querySelectorAll('.categoryContainer > div');
-    const todoInput = document.querySelector('.todoInput');
-    const submitTodoButton = document.querySelector('.submitTodoButton');
-    let selectedCategory = null;
+const todotlistButton = document.querySelector('.todotlistButton');
+const modalContainer = document.querySelector('.modalContainer');
+const modalCloseButton = document.querySelector('.modalCloseButton');
+const categoryContainer = document.querySelector('.categoryContainer');
+const categories = categoryContainer.querySelectorAll('div');
+const todoInput = document.querySelector('.todoInput');
+const todoSaveButton = document.querySelector('.todoSaveButton');
+let selectCategory = null;
+let categoryClass = '';
+let categoryText = '';
 
-    todotlistButton.addEventListener('click' , () => {
-        modalContainer.classList.add('show');
-        todoInput.value = '';
-        categories.forEach(c => c.classList.remove('dimmed'));
-        selectedCategory = null;
-        todoInput.focus();
-        categories.forEach(c => c.classList.remove('dimmed'));
+const loadTodos = () => {
+    const todos = JSON.parse(localStorage.getItem('todos')) || [];
+    const todolistContainer = document.querySelector('.todolistContainer');
+    todolistContainer.innerHTML = ''; 
+    todos.forEach(todo => {
+        todolistContainer.innerHTML += `
+            <div class="todolist">
+                <input type="checkbox" name="todostatus" class="todostatus" ${todo.checked ? 'checked' : ''}>
+                <p>${todo.text}</p>
+                <div class="listCate">
+                    <div class="${todo.categoryClass}">${todo.categoryText}</div>
+                </div>
+            </div>
+        `;
     });
 
-    modalCloseButton.addEventListener('click' , () => {
-        if(todoInput.value.trim() !== '') {
-            if(confirm('종료시 내용이 사라집니다. 종료하시겠습니까?') == true) {
-                modalContainer.classList.remove('show');
-                todoInput.value = '';
-            }  else {
-                return true;
-            }
-        }
-        modalContainer.classList.remove('show');
+    // Add event listeners for checkboxes to update checked state in localStorage
+    document.querySelectorAll('.todostatus').forEach((checkbox, index) => {
+        checkbox.addEventListener('change', () => {
+            const todos = JSON.parse(localStorage.getItem('todos')) || [];
+            todos[index].checked = checkbox.checked;
+            localStorage.setItem('todos', JSON.stringify(todos));
+        });
     });
+}
 
-    categories.forEach((c) => {
-        c.addEventListener('click' , () => {
-            categories.forEach((other) => {
-                if(other !== c) {
-                    other.classList.add('dimmed')
-                } else {
-                    other.classList.remove('dimmed');
-                    selectedCategory = c;
-                }
-            })
-        })
-    })
+// Call loadTodos on page load
+document.addEventListener('DOMContentLoaded', loadTodos);
 
-    todoInput.addEventListener('input' , () => {
-        if(todoInput.value.trim() !== '') {
-            submitTodoButton.style.visibility = 'visible'
+todotlistButton.addEventListener('click', () => {
+    categories.forEach(c => c.style.filter = 'grayscale(0)');
+    todoInput.value = '';
+    todoInput.focus();
+    modalContainer.classList.add('show');
+});
+
+modalCloseButton.addEventListener('click', () => {
+    if (todoInput.value.trim() !== '') {
+        if (confirm('창을 닫을 시 입력된 내용은 모두 사라집니다.')) {
+            modalContainer.classList.remove('show');
         } else {
-            submitTodoButton.style.visibility = 'hidden'
-        }
-    })
-
-    submitTodoButton.addEventListener('click' , () => {
-        if(!selectedCategory) {
-            alert('카테고리를 선택해주세요');
+            todoInput.focus();
             return;
         }
-    })
-}
-modal();
+    } else {
+        modalContainer.classList.remove('show');
+    }
+});
+
+categories.forEach((c) => {
+    c.addEventListener('click', () => {
+        categories.forEach((other) => {
+            if (other !== c) {
+                other.style.filter = 'grayscale(0.7)';
+            } else {
+                other.style.filter = 'grayscale(0)';
+            }
+        });
+        selectCategory = c;
+        categoryText = c.innerText;
+        categoryClass = c.className;
+    });
+});
+
+todoSaveButton.addEventListener('click', () => {
+    if (!selectCategory) {
+        alert('카테고리를 선택해주세요.');
+        return;
+    }
+    if (todoInput.value.trim() === '') {
+        alert('할 일을 입력해주세요.');
+        todoInput.focus();
+        return;
+    }
+
+    let inputText = todoInput.value;
+    const todolistContainer = document.querySelector('.todolistContainer');
+
+    // Add todo to localStorage
+    const todos = JSON.parse(localStorage.getItem('todos')) || [];
+    const newTodo = {
+        text: inputText,
+        categoryClass: categoryClass,
+        categoryText: categoryText,
+        checked: false
+    };
+    todos.push(newTodo);
+    localStorage.setItem('todos', JSON.stringify(todos));
+
+    // Add todo to DOM
+    todolistContainer.innerHTML += `
+        <div class="todolist">
+            <input type="checkbox" name="todostatus" class="todostatus">
+            <p>${inputText}</p>
+            <div class="listCate">
+                <div class="${categoryClass}">${categoryText}</div>
+            </div>
+        </div>
+    `;
+
+    // Add event listener for the new checkbox
+    const newCheckbox = todolistContainer.lastElementChild.querySelector('.todostatus');
+    newCheckbox.addEventListener('change', () => {
+        const todos = JSON.parse(localStorage.getItem('todos')) || [];
+        todos[todos.length - 1].checked = newCheckbox.checked;
+        localStorage.setItem('todos', JSON.stringify(todos));
+    });
+
+    modalContainer.classList.remove('show');
+});

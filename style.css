@@ -61,6 +61,50 @@ main {
         background: orange;
     }
 }
+.todolistContainer {
+    width: 90%;
+    height: 600px;
+    overflow-y: scroll;
+    color: orangered;
+}
+.todolistContainer::-webkit-scrollbar {
+    background: #111;
+    display: none;
+}
+.todolist {
+    display: flex;
+    width: 100%;
+    height: 80px;
+    /* background: aliceblue; */
+    justify-content: space-between;
+    align-items: center;
+}
+.todolist > input[type=checkbox] {
+    width: 25px;
+    height: 25px;
+    appearance: none;
+    cursor: pointer;
+    accent-color: #fff;
+    background: #fff;
+}
+.todolist > p {
+    display: block;
+    width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 18px;
+    color: #fff;
+}
+.lc4 {
+    background: orangered;
+    color: #fff;
+}
+.todostatus:checked {
+    background: orangered !important;
+    border-color: orangered;
+    accent-color: #fff;
+}
 .modalContainer {
     width: 600px;
     height: 900px;
@@ -79,7 +123,7 @@ main {
 }
 .modal {
     width: 80%;
-    height: 250px;
+    height: 300px;
     background: #fff;
     display: flex;
     flex-direction: column;
@@ -115,14 +159,14 @@ main {
 }
 .inputTodoContainer {
     width: 100%;
-    height: 150px;
-    /* background: red; */
+    height: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: start;
     padding: 10px;
     position: relative;
+    gap: 10px;
 }
 .categoryContainer {
     width: 90%;
@@ -131,11 +175,13 @@ main {
     display: flex;
     gap: 10px;
 }
-.categoryContainer > div {
+.categoryContainer > div,
+.listCate {
     width: 70px;
     height: 100%;
     text-align: center;
     align-content: center;
+    color: #111;
 }
 .categoryContainer > div:hover {
     cursor: pointer;
@@ -156,7 +202,7 @@ main {
 .dimmed {
     filter: grayscale(0.7);
 }
-.inputTodoContainer > input[type=text]{
+.inputTodoContainer input[type=text]{
     width: 90%;
     height: 70px;
     border: 1px solid #aaa;
@@ -164,17 +210,11 @@ main {
     padding-left: 10px;
     font-size: 23px;
 }
-.submitTodoButton {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    position: absolute;
-    background: #fff;
-    color: #aaa;
-    top: 55px;
-    right: 50px;
-    border: 2px solid #aaa;
-    visibility: hidden;
+.inputInner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .modalCloseButton {
     width: 50px;
@@ -191,4 +231,16 @@ main {
 .modalCloseButton:hover {
     cursor: pointer;
     background: #eee;
+}
+.todoSaveButton {
+    width: 90%;
+    height: 45px;
+    background: #111;
+    font-size: 20px;
+    border: none;
+    color: #fff;
+}
+.todoSaveButton:hover {
+    background: orangered;
+    cursor: pointer;
 }
