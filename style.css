@@ -243,3 +243,6 @@ main {
     background: orangered;
     cursor: pointer;
 }
+.todoManage > i:hover {
+    cursor: pointer;
+}
