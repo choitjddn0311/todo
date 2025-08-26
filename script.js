@@ -23,6 +23,10 @@ const loadTodos = () => {
                 <div class="listCate">
                     <div class="${todo.categoryClass}">${todo.categoryText}</div>
                 </div>
+                <div class="todoManage">
+                    <i class="fa-solid fa-trash"></i>
+                    <i class="fa-solid fa-pen"></i>
+                </div>
             </div>
         `;
     });
@@ -104,6 +108,10 @@ todoSaveButton.addEventListener('click', () => {
             <p class="pTag">${inputText}</p>
             <div class="listCate">
                 <div class="${categoryClass}">${categoryText}</div>
+            </div>
+            <div class="todoManage">
+                <i class="fa-solid fa-trash"></i>
+                <i class="fa-solid fa-pen"></i>
             </div>
         </div>
     `;
